@@ -1,0 +1,33 @@
+.shopping-cart-icon {
+  align-items: center;
+  background-color: rgb(0, 0, 70);
+  display: flex;
+  justify-content: space-between;
+}
+
+.shopping-cart-icon a {
+  text-decoration: none;
+}
+
+.shopping-cart-icon h2 {
+  color: white;
+  margin-left: 25px;
+}
+
+.shopping-cart-icon div {
+  align-items: center;
+  background-color: rgb(0, 0, 70);
+  border: 1px solid white;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin-right: 30px;
+  width: 40px;
+}
+
+svg {
+  color: white;
+  height: 2em;
+}

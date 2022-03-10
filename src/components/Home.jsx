@@ -1,5 +1,7 @@
 import React from 'react';
+import Header from './Header';
 import * as api from '../services/api';
+import '../assets/Home.css';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -14,7 +16,8 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <div>
+        <Header />
+        <div className="search-box">
           <label htmlFor="search">
             <input
               type="text"
@@ -27,6 +30,7 @@ class Home extends React.Component {
 
         <p
           data-testid="home-initial-message"
+          className="intro-message"
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
