@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../assets/CardList.css';
 
 class CardList extends React.Component {
   // título, imagem e preço como props
   render() {
     const { title, image, price } = this.props;
     return (
-      <div data-testid="product">
+      <div className="card-list-container" data-testid="product">
         <p>{title}</p>
         <img src={ image } alt={ title } />
-        <p>{ price }</p>
+        <p>
+          R$
+          {' '}
+          { price }
+        </p>
       </div>
     );
   }

@@ -49,7 +49,8 @@
 }
 
 .cards {
-  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
   padding: 10px;
   width: 100%;
 }

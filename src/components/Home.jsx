@@ -75,15 +75,17 @@ class Home extends React.Component {
           />
           <section className="categories-cards">
             <Categories categories={ categories } />
-            {
-              searchResult !== undefined && searchResult
-                .map((element) => (<CardList
-                  key={ element.id }
-                  title={ element.title }
-                  image={ element.thumbnail }
-                  price={ element.price }
-                />))
-            }
+            <div className="cards">
+              {
+                searchResult !== undefined && searchResult
+                  .map((element) => (<CardList
+                    key={ element.id }
+                    title={ element.title }
+                    image={ element.thumbnail }
+                    price={ element.price }
+                  />))
+              }
+            </div>
           </section>
         </section>
       </>
