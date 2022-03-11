@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.content {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .search-box {
   display: flex;
   justify-content: center;
@@ -20,4 +25,21 @@
   font-size: 1.1rem;
   margin-top: 30px;
   text-align: center;
+}
+
+.nav-categories {
+  height: auto;
+  padding: 10px;
+}
+
+.nav-categories div {
+  display: block;
+  height: auto;
+  padding: 5px 10px;
+  width: 200px;
+}
+
+.nav-categories div:hover {
+  color: red;
+  cursor: pointer;
 }

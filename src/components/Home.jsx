@@ -42,6 +42,7 @@ class Home extends React.Component {
         <section className="content">
           <Search />
           <Categories categories={ categories } />
+          <div className="cards"> Cards Aqui</div>
         </section>
       </>
     );
