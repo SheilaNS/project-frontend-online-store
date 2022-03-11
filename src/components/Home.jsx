@@ -1,39 +1,48 @@
 import React from 'react';
-import Header from './Header';
 import * as api from '../services/api';
+import Header from './Header';
 import '../assets/Home.css';
+import Categories from './Categories';
+import Search from './Search';
 
 class Home extends React.Component {
-  componentDidMount() {
-    this.handlePromises();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      categories: [],
+    };
   }
 
-  handlePromises = async () => {
-    await api.getCategories();
-    await api.getProductsFromCategoryAndQuery();
+  componentDidMount() {
+    this.handleCategories();
+    this.handleCategoryAndQuery();
+  }
+
+  handleCategories = async () => {
+    const categories = await api.getCategories();
+    this.setState({
+      categories,
+    });
+    console.log(categories);
+    return categories;
+  }
+
+  handleCategoryAndQuery = async () => {
+    const categorieAndQuery = await api.getProductsFromCategoryAndQuery();
+    return categorieAndQuery;
   }
 
   render() {
+    const { categories } = this.state;
     return (
       <>
         <Header />
-        <div className="search-box">
-          <label htmlFor="search">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Pesquisar"
-            />
-          </label>
-        </div>
 
-        <p
-          data-testid="home-initial-message"
-          className="intro-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        <section className="content">
+          <Search />
+          <Categories categories={ categories } />
+        </section>
       </>
     );
   }
