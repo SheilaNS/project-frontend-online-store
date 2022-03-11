@@ -1,0 +1,19 @@
+.card-list-container {
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.493);
+  display: flex;
+  flex-direction: column;
+  height: 278px;
+  justify-content: center;
+  margin: 8px;
+  padding: 8px;
+  width: 150px;
+}
+
+.card-list-container p {
+  text-align: center;
+}
+
+.card-list-container img {
+  width: 100px;
+}

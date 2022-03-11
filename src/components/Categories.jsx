@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../assets/Home.css';
 
 class Categories extends React.Component {
   render() {
