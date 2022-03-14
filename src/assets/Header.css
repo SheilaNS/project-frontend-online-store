@@ -12,7 +12,14 @@
 }
 
 .shopping-cart-icon a {
+  opacity: 0.85;
   text-decoration: none;
+  transition: 0.15s;
+}
+
+.shopping-cart-icon a:hover {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .shopping-cart-icon h2 {

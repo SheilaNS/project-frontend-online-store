@@ -39,12 +39,6 @@ class Home extends React.Component {
     return categorieAndQuery;
   }
 
-  handleProduct = async () => {
-    const product = await api.getProducts();
-    // console.log(product);
-    return product;
-  }
-
   handleQuery = async () => {
     const { searchInput } = this.state;
     const query = await api.getQuery(searchInput);
@@ -93,6 +87,7 @@ class Home extends React.Component {
                 searchResult !== undefined && searchResult
                   .map((element) => (<CardList
                     key={ element.id }
+                    id={ element.id }
                     title={ element.title }
                     image={ element.thumbnail }
                     price={ element.price }
