@@ -26,7 +26,7 @@ class Home extends React.Component {
 
   handleCategories = async () => {
     const categories = await api.getCategories();
-    console.log(categories);
+    // console.log(categories);
     this.setState({
       categories,
     });
@@ -48,16 +48,29 @@ class Home extends React.Component {
   handleQuery = async () => {
     const { searchInput } = this.state;
     const query = await api.getQuery(searchInput);
-    console.log(query.results);
     this.setState({
       searchResult: query.results,
     });
     return query;
   }
 
+  handleGetByCategory = async (categoryId) => {
+    const category = await api.getByCategory(categoryId);
+    // console.log(category);
+    return category;
+  }
+
   handleChange = ({ target }) => {
     this.setState({
       [target.name]: target.value,
+    });
+  }
+
+  handleClick = async ({ target }) => {
+    // outra possibilidade: target.getAttribute('id')
+    const categoryItems = await this.handleGetByCategory(target.id);
+    this.setState({
+      searchResult: categoryItems.results,
     });
   }
 
@@ -74,7 +87,7 @@ class Home extends React.Component {
             onClick={ this.handleQuery }
           />
           <section className="categories-cards">
-            <Categories categories={ categories } />
+            <Categories onClick={ this.handleClick } categories={ categories } />
             <div className="cards">
               {
                 searchResult !== undefined && searchResult
