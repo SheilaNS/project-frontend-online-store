@@ -26,7 +26,7 @@ class Categories extends React.Component {
               onClick={ onClick }
               key={ index }
               role="button"
-              tabIndex={ index }
+              tabIndex="0"
               onKeyDown={ onClick }
             >
               { element.name }
