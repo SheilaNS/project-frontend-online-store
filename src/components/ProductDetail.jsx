@@ -25,8 +25,6 @@ class ProductDetails extends React.Component {
     });
   }
 
-  // data-testid="product-detail-name"
-
   render() {
     const { products } = this.state;
     return (
