@@ -19,9 +19,9 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.handleCategories();
-    this.handleCategoryAndQuery();
-    this.handleProduct();
-    this.handleQuery();
+    // this.handleCategoryAndQuery();
+    // this.handleProduct();
+    // this.handleQuery();
   }
 
   handleCategories = async () => {
