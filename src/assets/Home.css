@@ -36,12 +36,16 @@
   display: block;
   height: auto;
   padding: 5px 10px;
+  transition: 0.5;
   width: 250px;
 }
 
 .nav-categories div:hover {
-  color: red;
+  background-color: #071c46;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .categories-cards {

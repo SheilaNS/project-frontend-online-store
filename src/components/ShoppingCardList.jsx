@@ -12,34 +12,50 @@ class ShoppingCardList extends React.Component {
     };
   }
 
+  // componentDidUpdate() {
+  // if (document.getElementsByClassName('shopping-card')[0].innerHTML === '') {
+  //   document
+  //     .getElementsByClassName('shopping-card')[0].innerHTML = 'Seu carrinho está vazio';
+  // }
+  // }
+
   readList = () => JSON.parse(localStorage.getItem('cartList'));
 
   saveList = (list) => localStorage
     .setItem('cartList', JSON.stringify(list));
 
-    removeItem = ({ target }) => {
-      const localList = this.readList();
-      console.log(target);
-      this.saveList(localList.filter((item) => item.prodId !== target.value));
+  removeItem = ({ target }) => {
+    const localList = this.readList();
+    console.log(target);
+    this.saveList(localList.filter((item) => item.prodId !== target.value));
+    target.parentElement.parentElement.remove();
+    if (document.getElementsByClassName('shopping-card')[0].innerHTML === '') {
+      document.getElementsByClassName('shopping-card')[0].innerHTML = `<div
+      data-testid="shopping-cart-empty-message"
+      className="empty-cart"
+    >
+      Seu carrinho está vazio
+    </div>`;
     }
+  }
 
-    handleClick = ({ target }) => {
-      if (target.id === 'more') {
-        const storage = this.readList();
-        const item = storage.find((element) => element.prodId === target.value);
-        item.prodQTD += 1;
-        this.saveList(storage.filter((element) => element.prodId !== target.value));
-        const newLocalList = this.readList();
-        this.saveList([...newLocalList, item]);
-      } else {
-        const storage = this.readList();
-        const item = storage.find((element) => element.prodId === target.value);
-        item.prodQTD -= 1;
-        this.saveList(storage.filter((element) => element.prodId !== target.value));
-        const newLocalList = this.readList();
-        this.saveList([...newLocalList, item]);
-      }
+  handleClick = ({ target }) => {
+    if (target.id === 'more') {
+      const storage = this.readList();
+      const item = storage.find((element) => element.prodId === target.value);
+      item.prodQTD += 1;
+      this.saveList(storage.filter((element) => element.prodId !== target.value));
+      const newLocalList = this.readList();
+      this.saveList([...newLocalList, item]);
+    } else {
+      const storage = this.readList();
+      const item = storage.find((element) => element.prodId === target.value);
+      item.prodQTD -= 1;
+      this.saveList(storage.filter((element) => element.prodId !== target.value));
+      const newLocalList = this.readList();
+      this.saveList([...newLocalList, item]);
     }
+  }
 
   handleCards = () => {
     const { title, image, price, id, qtd } = this.props;
@@ -50,7 +66,7 @@ class ShoppingCardList extends React.Component {
           <button
             value={ id }
             type="button"
-            onClick={ this.removeItemFromCart }
+            onClick={ this.removeItem }
           >
             x
           </button>
