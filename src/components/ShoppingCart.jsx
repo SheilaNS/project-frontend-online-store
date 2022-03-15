@@ -35,6 +35,7 @@ class ShoppingCart extends React.Component {
                   image={ prod.prodImage }
                   price={ prod.prodPrice }
                   id={ prod.prodId }
+                  qtd={ prod.prodQTD }
                 />
               ))
           }

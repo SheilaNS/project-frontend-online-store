@@ -14,6 +14,7 @@ class CardList extends React.Component {
         prodPrice: price,
         prodId: id,
         prodImage: image,
+        prodQTD: 1,
       },
     };
   }
@@ -23,13 +24,31 @@ class CardList extends React.Component {
   saveList = (list) => localStorage
     .setItem('cartList', JSON.stringify(list));
 
+  removeItem = (target) => {
+    const localList = this.readList();
+    this.saveList(localList.filter((item) => item.prodId !== target));
+  }
+
   handleCart = () => {
     const { cartList } = this.state;
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));
     }
     const localList = this.readList();
-    this.saveList([...localList, cartList]);
+    if (localList.length === 0) {
+      this.saveList([...localList, cartList]);
+    }
+    localList.forEach((element) => {
+      if (cartList.prodId === element.prodId) {
+        const value = element;
+        this.removeItem(element.prodId);
+        value.prodQTD += 1;
+        const newLocalList = this.readList();
+        this.saveList([...newLocalList, value]);
+      } else {
+        this.saveList([...localList, cartList]);
+      }
+    });
   };
 
   handleCards = () => {
