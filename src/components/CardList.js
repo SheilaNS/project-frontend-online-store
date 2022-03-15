@@ -6,55 +6,47 @@ import '../assets/CardList.css';
 class CardList extends React.Component {
   constructor(props) {
     super(props);
+    const { title, image, price, id } = this.props;
 
     this.state = {
-      cartList: [],
+      cartList: {
+        prodTitle: title,
+        prodPrice: price,
+        prodId: id,
+        prodImage: image,
+      },
     };
   }
 
+  readList = () => JSON.parse(localStorage.getItem('cartList'));
+
+  saveList = (list) => localStorage
+    .setItem('cartList', JSON.stringify(list));
+
   handleCart = () => {
-    const cartList = [];
-    /* const { cartList } = this.state; */
-    const { title, image, price, id } = this.props;
-
-    const infoProducts = {
-      title,
-      image,
-      price,
-      id,
-    };
-
-    // cartList.push(infoProducts);
-    /* console.log(cartList); */
-
-    // this.setState((beforeState) => ({
-    //   cartList: cartList.concat({
-    //     cartList: beforeState.infoProducts,
-    //   }),
-    // }), localStorage.setItem('cartList', JSON.stringify(cartList)));
-
-    this.setState((beforeState) => ({
-      cartList: [...beforeState.cartList, { infoProducts }],
-    }), localStorage.setItem('cartList', JSON.stringify(cartList)));
-
-    // console.log(cartList);
-    // console.log(infoProducts);
+    const { cartList } = this.state;
+    if (!JSON.parse(localStorage.getItem('cartList'))) {
+      localStorage.setItem('cartList', JSON.stringify([]));
+    }
+    const localList = this.readList();
+    this.saveList([...localList, cartList]);
   };
 
   handleCards = () => {
     const { title, image, price, id } = this.props;
     return (
-      <div className="card-list-container">
-        <Link to={ `/productdetail/${id}` }>
+      <div>
+        <Link className="link-shopping-card-list" to={ `/productdetail/${id}` }>
           <section data-testid="product-detail-link">
             <div
+              className="card-list-container"
               data-testid="product"
               id={ id }
             >
 
-              <p>{title}</p>
-              <img src={ image } alt={ title } />
-              <p>
+              <p className="title-card-list">{title}</p>
+              <img className="image-card-list" src={ image } alt={ title } />
+              <p className="price-card-list">
                 R$
                 {' '}
                 { price }

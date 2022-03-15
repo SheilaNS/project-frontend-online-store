@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.card-list-container {
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.493);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 278px;
+  justify-content: center;
+  margin: 8px;
+  padding: 8px;
+  width: 200px;
+}
+
+.shopping-card {
+  display: flex;
+}
+
+.link-shopping-card-list {
+  text-decoration: none;
+}
