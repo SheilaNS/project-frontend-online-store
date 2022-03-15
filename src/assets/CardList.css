@@ -8,7 +8,7 @@
   justify-content: center;
   margin: 8px;
   padding: 8px;
-  width: 150px;
+  width: 200px;
 }
 
 .card-list-container:hover {
@@ -22,4 +22,22 @@
 
 .card-list-container img {
   width: 100px;
+}
+
+.link-shopping-card-list {
+  text-decoration: none;
+}
+
+.title-card-list {
+  padding: 10px;
+  text-align: center;
+}
+
+.image-card-list {
+  margin: 10px;
+}
+
+.price-card-list {
+  padding: 10px;
+
 }

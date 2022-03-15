@@ -91,6 +91,7 @@ class Home extends React.Component {
                     title={ element.title }
                     image={ element.thumbnail }
                     price={ element.price }
+                    onClick={ this.handleCartItem }
                   />))
               }
             </div>
