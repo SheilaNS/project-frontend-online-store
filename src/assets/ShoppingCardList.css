@@ -17,10 +17,52 @@
   width: 200px;
 }
 
+.card-list-container:hover {
+  background-color: azure;
+}
+
+.remove-item {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.remove-item button {
+  background-color: rgb(0, 0, 70);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  height: 20px;
+  margin: 10px;
+  width: 20px;
+}
+
 .shopping-card {
   display: flex;
 }
 
 .link-shopping-card-list {
   text-decoration: none;
+}
+
+.change-quantity {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.change-quantity p {
+  color: black;
+}
+
+.change-quantity button {
+  background-color: rgb(0, 0, 70);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  height: 20px;
+  margin: 10px;
+  width: 20px;
 }
