@@ -12,12 +12,14 @@ class ShoppingCardList extends React.Component {
     };
   }
 
-  // componentDidUpdate() {
-  // if (document.getElementsByClassName('shopping-card')[0].innerHTML === '') {
-  //   document
-  //     .getElementsByClassName('shopping-card')[0].innerHTML = 'Seu carrinho está vazio';
-  // }
-  // }
+  componentDidMount() {
+    const { id } = this.props;
+    const storage = this.readList();
+    const item = storage.find((element) => element.prodId === id);
+    this.setState(({
+      counter: item.prodQTD,
+    }));
+  }
 
   readList = () => JSON.parse(localStorage.getItem('cartList'));
 
@@ -44,6 +46,9 @@ class ShoppingCardList extends React.Component {
       const storage = this.readList();
       const item = storage.find((element) => element.prodId === target.value);
       item.prodQTD += 1;
+      this.setState(({
+        counter: item.prodQTD,
+      }));
       this.saveList(storage.filter((element) => element.prodId !== target.value));
       const newLocalList = this.readList();
       this.saveList([...newLocalList, item]);
@@ -51,6 +56,9 @@ class ShoppingCardList extends React.Component {
       const storage = this.readList();
       const item = storage.find((element) => element.prodId === target.value);
       item.prodQTD -= 1;
+      this.setState(({
+        counter: item.prodQTD,
+      }));
       this.saveList(storage.filter((element) => element.prodId !== target.value));
       const newLocalList = this.readList();
       this.saveList([...newLocalList, item]);
@@ -58,7 +66,7 @@ class ShoppingCardList extends React.Component {
   }
 
   handleCards = () => {
-    const { title, image, price, id, qtd } = this.props;
+    const { title, image, price, id } = this.props;
     const { counter } = this.state;
     return (
       <div className="card-list-container">
@@ -97,7 +105,12 @@ class ShoppingCardList extends React.Component {
           >
             +
           </button>
-          <p value={ counter } data-testid="shopping-cart-product-quantity">{`${qtd}`}</p>
+          <p
+            value={ counter }
+            data-testid="shopping-cart-product-quantity"
+          >
+            {`${counter}`}
+          </p>
           <button
             data-testid="product-decrease-quantity"
             type="button"
