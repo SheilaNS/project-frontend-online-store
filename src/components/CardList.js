@@ -54,7 +54,7 @@ class CardList extends React.Component {
   handleCards = () => {
     const { title, image, price, id } = this.props;
     return (
-      <div>
+      <div className="outer-box">
         <Link className="link-shopping-card-list" to={ `/productdetail/${id}` }>
           <section data-testid="product-detail-link">
             <div

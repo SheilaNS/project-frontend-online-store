@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import Header from './Header';
 import '../assets/ProductDetails.css';
+import Rate from './Rate';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -10,6 +11,8 @@ class ProductDetails extends React.Component {
 
     this.state = {
       products: [],
+      email: '',
+      evaluation: '',
     };
   }
 
@@ -46,8 +49,23 @@ class ProductDetails extends React.Component {
     });
   }
 
+  handleChange = ({ target }) => {
+    this.setState({
+      [target.name]: target.value,
+    });
+  }
+
+  handleClick = (event) => {
+    const { email, evaluation } = this.state;
+    event.preventDefault();
+    this.setState({
+      email: '',
+      evaluation: '',
+    });
+  }
+
   render() {
-    const { products } = this.state;
+    const { products, email, evaluation } = this.state;
     return (
       <>
         <Header />
@@ -95,6 +113,46 @@ class ProductDetails extends React.Component {
             Adicionar ao Carrinho
           </button>
         </div>
+        <fieldset className="fieldset-evaluation">
+          <legend className="legend-evaluation">Evaluation</legend>
+          <form className="form-evaluation">
+            <label htmlFor="email">
+              <input
+                data-testid="product-detail-email"
+                id="email"
+                value={ email }
+                type="email"
+                name="email"
+                placeholder="Digite o email aqui."
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="email">
+              <Rate />
+              <textarea
+                data-testid="product-detail-evaluation"
+                id="evaluation"
+                value={ evaluation }
+                type="evaluation"
+                name="evaluation"
+                placeholder="Digite sua avaliação aqui."
+                onChange={ this.handleChange }
+              />
+            </label>
+
+            <button
+              className="button-evaluation"
+              type="submit"
+              data-testid="submit-review-btn"
+            >
+              Submit
+            </button>
+          </form>
+        </fieldset>
+        <section className="people-evaluation">
+          <p>{ }</p>
+          <p></p>
+        </section>
       </>
     );
   }

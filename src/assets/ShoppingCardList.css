@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.card-list-container {
+/* .card-list-container {
   align-items: center;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.493);
   cursor: pointer;
@@ -19,7 +19,7 @@
 
 .card-list-container:hover {
   background-color: azure;
-}
+} */
 
 .remove-item {
   align-items: center;

@@ -28,9 +28,9 @@ class ShoppingCart extends React.Component {
                 >
                   Seu carrinho está vazio
                 </div>)
-              : cartList.map((prod) => (
+              : cartList.map((prod, index) => (
                 <ShoppingCardList
-                  key={ prod.prodId }
+                  key={ index }
                   title={ prod.prodTitle }
                   image={ prod.prodImage }
                   price={ prod.prodPrice }
