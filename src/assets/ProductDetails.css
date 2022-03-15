@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.image-detail {
+  width: 200px;
+}
+
+.image-detail-div {
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.btn-add-cart {
+  background-color: rgb(0, 0, 70);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  height: 100px;
+  width: 100px;
+}
+
+.btn-add-cart:hover {
+  background-color: rgb(54, 54, 173);
+}
