@@ -14,6 +14,7 @@ class CardList extends React.Component {
         prodPrice: price,
         prodId: id,
         prodImage: image,
+        prodQTD: 1,
       },
     };
   }
@@ -23,13 +24,53 @@ class CardList extends React.Component {
   saveList = (list) => localStorage
     .setItem('cartList', JSON.stringify(list));
 
+  removeItem = (target) => {
+    const localList = this.readList();
+    this.saveList(localList.filter((item) => item.prodId !== target));
+  }
+
   handleCart = () => {
     const { cartList } = this.state;
+    const { title, image, price, id } = this.props;
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));
     }
     const localList = this.readList();
-    this.saveList([...localList, cartList]);
+    if (localList.length === 0) {
+      this.saveList([...localList, cartList]);
+    }
+    console.log(localList.length);
+    localList.forEach((element) => {
+      if (cartList.prodId === element.prodId) {
+        this.setState((previous) => ({
+          cartList: {
+            ...cartList,
+            prodQTD: previous.cartList.prodQTD + 1,
+          },
+        }), () => localStorage.removeItem('cartList'));
+      } else {
+        this.setState(() => ({
+          cartList: {
+            ...cartList,
+            prodTitle: title,
+            prodPrice: price,
+            prodId: id,
+            prodImage: image,
+            prodQTD: 1,
+          },
+        }));
+        this.saveList([...localList, cartList]);
+      }
+    });
+    // if (test) {
+    //   this.setState((previous) => ({
+    //     cartList: {
+    //       prodQTD: previous.cartList.prodQTD + 1,
+    //     },
+    //   }));
+    // } else {
+    // }
+    // console.log(cartList);
   };
 
   handleCards = () => {

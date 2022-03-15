@@ -29,6 +29,7 @@ class ProductDetails extends React.Component {
       prodPrice: products.price,
       prodId: products.id,
       prodImage: products.thumbnail,
+      prodQTD: 1,
     };
     if (!JSON.parse(localStorage.getItem('cartList'))) {
       localStorage.setItem('cartList', JSON.stringify([]));

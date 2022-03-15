@@ -4,8 +4,18 @@ import '../assets/ShoppingCardList.css';
 import { Link } from 'react-router-dom';
 
 class ShoppingCardList extends React.Component {
+  readList = () => JSON.parse(localStorage.getItem('cartList'));
+
+  saveList = (list) => localStorage
+    .setItem('cartList', JSON.stringify(list));
+
+    removeItem = ({ target }) => {
+      const localList = this.readList();
+      this.saveList(localList.filter((item) => item.prodId !== target.value));
+    }
+
   handleCards = () => {
-    const { title, image, price, id } = this.props;
+    const { title, image, price, id, qtd } = this.props;
     return (
       <div className="card-list-container">
         <Link className="link-shopping-card-list" to={ `/productdetail/${id}` }>
@@ -16,7 +26,28 @@ class ShoppingCardList extends React.Component {
             >
               <p data-testid="shopping-cart-product-name">{title}</p>
               <img src={ image } alt={ title } />
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <button
+                data-testid="product-increase-quantity"
+                type="button"
+                // onClick={}
+              >
+                +
+              </button>
+              <p data-testid="shopping-cart-product-quantity">{qtd}</p>
+              <button
+                data-testid="product-decrease-quantity"
+                type="button"
+                // onClick={}
+              >
+                -
+              </button>
+              <button
+                value={ id }
+                type="button"
+                onClick={ this.removeItem }
+              >
+                x
+              </button>
               <p>
                 R$
                 {' '}

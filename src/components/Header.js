@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <header className="shopping-cart-icon">
-        <Link to="/"><h2>HEADER</h2></Link>
+        <Link to="/"><h2>HOME</h2></Link>
         <Link to="/shoppingcart">
           <div data-testid="shopping-cart-button">
             <BsCart />
