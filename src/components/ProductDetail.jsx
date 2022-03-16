@@ -72,7 +72,7 @@ class ProductDetails extends React.Component {
 
     this.setState((previous) => ({
       evaluationList: [...previous.evaluationList, obj],
-    }));
+    }), () => this.handleLocalStorage());
 
     this.setState({
       email: '',
@@ -86,6 +86,11 @@ class ProductDetails extends React.Component {
     for (let index = 0; index < rate; index += 1) {
       arrayBox[index].checked = false;
     }
+  }
+
+  handleLocalStorage = () => {
+    const { evaluationList } = this.state;
+    this.saveList(evaluationList);
   }
 
   render() {
@@ -180,6 +185,12 @@ class ProductDetails extends React.Component {
         <section className="people-evaluation">
           {
             evaluationList.length !== 0 && evaluationList
+              .map((element, index) => <EvaluationList key={ index } data={ element } />)
+          }
+        </section>
+        <section className="people-evaluation">
+          {
+            this.readList() !== null && this.readList()
               .map((element, index) => <EvaluationList key={ index } data={ element } />)
           }
         </section>
