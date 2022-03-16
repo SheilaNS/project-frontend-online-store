@@ -3,8 +3,8 @@
   border-radius: 5px;
   cursor: pointer;
   display: flex;
-  height: 325px;
   flex-direction: column;
+  height: 325px;
   justify-content: space-around;
   margin: 20px 5px;
   padding: 5px 15px;
@@ -23,8 +23,8 @@
   color: white;
   cursor: pointer;
   opacity: 0.85;
-  padding: 10px 10px;  
-  width: 100%
+  padding: 10px;
+  width: 100%;
 }
 
 .outer-box button:hover {
