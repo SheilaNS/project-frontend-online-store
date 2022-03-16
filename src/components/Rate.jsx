@@ -1,35 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Rate extends React.Component {
-  handleClick = ({ target }) => {
-    const position = target.value;
-    const arrayBox = target.parentNode.childNodes;
-    arrayBox.forEach((element, index) => {
-      if (index <= position) {
-        element.checked = true;
-      } else {
-        element.checked = false;
-      }
-    });
-  }
-
   render() {
-    const number = 5;
+    const { array, handleClick } = this.props;
     return (
       <div>
-        {[...Array(number)].map((_element, index) => (
+        {array.map((_element, index) => (
           <input
             key={ index }
+            className="rate"
             data-testid={ `${index + 1}-rating` }
             id="rate"
             name="rate"
             value={ index }
             type="checkbox"
-            onClick={ this.handleClick }
+            onClick={ handleClick }
+            // checked={  }
           />))}
       </div>
     );
   }
 }
+
+Rate.propTypes = {
+  array: PropTypes.array,
+  handleClick: PropTypes.func,
+}.isRequired;
 
 export default Rate;
