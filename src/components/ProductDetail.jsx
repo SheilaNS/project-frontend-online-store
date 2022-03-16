@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import Header from './Header';
 import '../assets/ProductDetails.css';
+import Rate from './Rate';
+import EvaluationList from './EvaluationList';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
 
+    const number = 5;
     this.state = {
       products: [],
+      email: '',
+      evaluation: '',
+      array: [...Array(number)],
+      rate: 0,
+      evaluationList: [],
     };
   }
 
@@ -17,26 +25,10 @@ class ProductDetails extends React.Component {
     this.handleProduct();
   }
 
-  readList = () => JSON.parse(localStorage.getItem('cartList'));
+  readList = () => JSON.parse(localStorage.getItem('evaluationList'));
 
   saveList = (list) => localStorage
-    .setItem('cartList', JSON.stringify(list));
-
-  handleCart = () => {
-    const { products } = this.state;
-    const cartList = {
-      prodTitle: products.title,
-      prodPrice: products.price,
-      prodId: products.id,
-      prodImage: products.thumbnail,
-      prodQTD: 1,
-    };
-    if (!JSON.parse(localStorage.getItem('cartList'))) {
-      localStorage.setItem('cartList', JSON.stringify([]));
-    }
-    const localList = this.readList();
-    this.saveList([...localList, cartList]);
-  };
+    .setItem('evaluationList', JSON.stringify(list));
 
   handleProduct = async () => {
     const { match: { params: { id } } } = this.props;
@@ -46,8 +38,58 @@ class ProductDetails extends React.Component {
     });
   }
 
+  handleChange = ({ target }) => {
+    this.setState({
+      [target.name]: target.value,
+    });
+  }
+
+  handleClick = ({ target }) => {
+    const position = target.value;
+    const arrayBox = target.parentNode.childNodes;
+    arrayBox.forEach((element, index) => {
+      if (index <= position) {
+        element.checked = true;
+        this.setState({
+          rate: +position + 1,
+        });
+      } else {
+        element.checked = false;
+      }
+    });
+  }
+
+  handleEvaluationButton = (event) => {
+    event.preventDefault();
+    const { email, evaluation, rate } = this.state;
+    const obj = {
+      email,
+      evaluation,
+      rate,
+    };
+
+    this.handleUncheck(rate);
+
+    this.setState((previous) => ({
+      evaluationList: [...previous.evaluationList, obj],
+    }));
+
+    this.setState({
+      email: '',
+      evaluation: '',
+      rate: 0,
+    });
+  }
+
+  handleUncheck = (rate) => {
+    const arrayBox = document.getElementsByClassName('rate');
+    for (let index = 0; index < rate; index += 1) {
+      arrayBox[index].checked = false;
+    }
+  }
+
   render() {
-    const { products } = this.state;
+    const { products, email, evaluation, array, evaluationList } = this.state;
     return (
       <>
         <Header />
@@ -95,6 +137,52 @@ class ProductDetails extends React.Component {
             Adicionar ao Carrinho
           </button>
         </div>
+        <fieldset className="fieldset-evaluation">
+          <legend className="legend-evaluation">Evaluation</legend>
+          <form className="form-evaluation">
+            <label htmlFor="email">
+              <input
+                data-testid="product-detail-email"
+                id="email"
+                value={ email }
+                type="email"
+                name="email"
+                placeholder="Digite o email aqui."
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="email">
+              <Rate
+                array={ array }
+                handleClick={ this.handleClick }
+              />
+              <textarea
+                data-testid="product-detail-evaluation"
+                id="evaluation"
+                value={ evaluation }
+                type="evaluation"
+                name="evaluation"
+                placeholder="Digite sua avaliação aqui."
+                onChange={ this.handleChange }
+              />
+            </label>
+
+            <button
+              className="button-evaluation"
+              type="submit"
+              data-testid="submit-review-btn"
+              onClick={ this.handleEvaluationButton }
+            >
+              Submit
+            </button>
+          </form>
+        </fieldset>
+        <section className="people-evaluation">
+          {
+            evaluationList.length !== 0 && evaluationList
+              .map((element, index) => <EvaluationList key={ index } data={ element } />)
+          }
+        </section>
       </>
     );
   }
