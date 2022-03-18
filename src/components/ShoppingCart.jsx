@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import '../assets/ShoppingCart.css';
 import ShoppingCardList from './ShoppingCardList';
@@ -39,6 +40,11 @@ class ShoppingCart extends React.Component {
                 />
               ))
           }
+          <Link to="/checkoutpage">
+            <button type="button" data-testid="checkout-products">
+              Continuar a Compra
+            </button>
+          </Link>
         </div>
       </>
     );

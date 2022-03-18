@@ -9,15 +9,18 @@ class ShoppingCardList extends React.Component {
 
     this.state = {
       counter: 1,
+      newPrice: 0,
     };
   }
 
   componentDidMount() {
-    const { id } = this.props;
+    const { id, price } = this.props;
     const storage = this.readList();
     const item = storage.find((element) => element.prodId === id);
     this.setState(({
       counter: item.prodQTD,
+      newPrice: item.prodPrice,
+      originalPrice: price,
     }));
   }
 
@@ -42,12 +45,19 @@ class ShoppingCardList extends React.Component {
   }
 
   handleClick = ({ target }) => {
+    // const { price } = this.props;
+    const { originalPrice } = this.state;
     if (target.id === 'more') {
       const storage = this.readList();
       const item = storage.find((element) => element.prodId === target.value);
+      // console.log(item.prodPrice);
+      // console.log(price);
       item.prodQTD += 1;
+      item.prodPrice = item.prodQTD * originalPrice;
+      // console.log(item.prodPrice);
       this.setState(({
         counter: item.prodQTD,
+        newPrice: item.prodPrice,
       }));
       this.saveList(storage.filter((element) => element.prodId !== target.value));
       const newLocalList = this.readList();
@@ -66,8 +76,8 @@ class ShoppingCardList extends React.Component {
   }
 
   handleCards = () => {
-    const { title, image, price, id } = this.props;
-    const { counter } = this.state;
+    const { title, image, id } = this.props;
+    const { counter, newPrice } = this.state;
     return (
       <div className="card-list-container">
         <div className="remove-item">
@@ -90,7 +100,7 @@ class ShoppingCardList extends React.Component {
               <p>
                 R$
                 {' '}
-                { price }
+                { newPrice }
               </p>
             </div>
           </section>
