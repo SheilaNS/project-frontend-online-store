@@ -1,26 +1,26 @@
 .nav-categories {
-    height: auto;
-    margin: -120px 0;
-    padding: 10px;
+  height: auto;
+  margin: -120px 0;
+  padding: 10px;
 }
-  
-  .nav-categories div {
-    display: block;
-    height: auto;
-    padding: 5px 10px;
-    transition: 0.5;
-    width: 250px;
+
+.nav-categories div {
+  display: block;
+  height: auto;
+  padding: 5px 10px;
+  transition: 0.5;
+  width: 250px;
 }
-  
-  .nav-categories div:hover {
-    background-color: #071c46;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
+
+.nav-categories div:hover {
+  background-color: #071c46;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
 }
-  
+
 
 .categories-cards {
-    display: flex;
+  display: flex;
 }

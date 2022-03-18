@@ -30,6 +30,11 @@ class ProductDetails extends React.Component {
   saveList = (list) => localStorage
     .setItem('evaluationList', JSON.stringify(list));
 
+  readListCart = () => JSON.parse(localStorage.getItem('cartList'));
+
+  saveListCart = (list) => localStorage
+    .setItem('cartList', JSON.stringify(list));
+
   handleProduct = async () => {
     const { match: { params: { id } } } = this.props;
     const product = await api.getProducts(id);
@@ -43,6 +48,26 @@ class ProductDetails extends React.Component {
       [target.name]: target.value,
     });
   }
+
+  handleCart = () => {
+    const { products } = this.state;
+
+    const cartList = {
+      prodTitle: products.title,
+      prodPrice: products.price,
+      prodId: products.id,
+      prodImage: products.thumbnail,
+      prodQTD: 1,
+    };
+
+    if (!JSON.parse(localStorage.getItem('cartList'))) {
+      localStorage.setItem('cartList', JSON.stringify([]));
+    }
+
+    const localList = this.readListCart();
+    console.log(localList);
+    this.saveListCart([...localList, cartList]);
+  };
 
   handleClick = ({ target }) => {
     const position = target.value;
@@ -72,7 +97,7 @@ class ProductDetails extends React.Component {
 
     this.setState((previous) => ({
       evaluationList: [...previous.evaluationList, obj],
-    }));
+    }), () => this.handleLocalStorage());
 
     this.setState({
       email: '',
@@ -86,6 +111,11 @@ class ProductDetails extends React.Component {
     for (let index = 0; index < rate; index += 1) {
       arrayBox[index].checked = false;
     }
+  }
+
+  handleLocalStorage = () => {
+    const { evaluationList } = this.state;
+    this.saveList(evaluationList);
   }
 
   render() {
@@ -180,6 +210,12 @@ class ProductDetails extends React.Component {
         <section className="people-evaluation">
           {
             evaluationList.length !== 0 && evaluationList
+              .map((element, index) => <EvaluationList key={ index } data={ element } />)
+          }
+        </section>
+        <section className="people-evaluation">
+          {
+            this.readList() !== null && this.readList()
               .map((element, index) => <EvaluationList key={ index } data={ element } />)
           }
         </section>
